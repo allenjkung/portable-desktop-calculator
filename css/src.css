@@ -1,0 +1,26 @@
+/*main*/
+
+/*id*/
+#button-bar {
+    display: flex;
+}
+#calculator-main-div {
+    display: flex;
+    flex-direction: column;
+}
+#main-buttons-div {
+    display: flex;
+    flex-direction: column;
+}
+#secondary-buttons-div-right {
+    display: flex;
+}
+
+/*class*/
+.col {
+    display: flex;
+    flex-direction: column;
+}
+.row {
+    display: flex;
+}

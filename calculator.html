@@ -12,7 +12,13 @@
                 <div id="result-output-div"></div>
             </div>
             <div id="button-bar">
-                <div id="secondary-buttons-div-left" class="secondary-buttons"></div>
+                <div id="secondary-buttons-div-left" class="secondary-buttons">
+                    <div class="row">
+                        <button id="button-lp" onclick="handleButtonValue('\(')">(</button>
+                        <button id="button-rp" onclick="handleButtonValue('\)')">)</button>
+                        <button id="button-power" onclick="handleButtonValue('^')">^</button>
+                    </div>
+                </div>
                 <div id="main-buttons-div">
                     <div class="row">
                         <button id="button-1" onclick="handleButtonValue(1)">1</button>

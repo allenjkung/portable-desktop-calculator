@@ -1,6 +1,7 @@
 let ghostOutputElem = document.getElementById('ghost-output');
 const pemdasOperators = [
     {'(' : '', ')' : (a) => handleRightParenthesis(a)},
+    {'^' : (a, b) => Math.pow(a,b)},
     {'*' : (a, b) => a * b, '/' : (a, b) => a / b},
     {'+' : (a, b) => a + b, '-' : (a, b) => a - b}
 ];
@@ -9,7 +10,7 @@ function tokenize(str) {
     const tokenArr = [];
     let token = '';
     for(const character of str) {
-        if('()*/+-'.includes(character)) {
+        if('()^*/+-'.includes(character)) {
             if(token === '' && character === '-') {
                 token = '-';
             }
@@ -59,13 +60,11 @@ function handleRightParenthesis(pastTokens) {
         parenthesisTokens = reverseArray(parenthesisTokens);
         emdasOperators = pemdasOperators.slice(1);
         let operator = '';
-        let operatorValue = '';
         for(const operators of emdasOperators) {
             const newTokens = [];
             for(const token of parenthesisTokens) {
                 if(token in operators) {
                     operator = operators[token];
-                    operatorValue = token;
                 }
                 else if(operator) {
                     if(newTokens.length - 1 < 0) {
@@ -73,7 +72,6 @@ function handleRightParenthesis(pastTokens) {
                     }
                     newTokens[newTokens.length - 1] = operator(newTokens[newTokens.length - 1], token);
                     operator = '';
-                    operatorValue = token;
                 }
                 else {
                     newTokens.push(token);

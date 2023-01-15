@@ -5,58 +5,65 @@
         <script src="js/src.js"></script>
     </head>
     <body>
-        <div id="calculator-main-div">
-            <div id="top-bar">
-                <div id="result-bar-div"><input id="result-bar" type="text"></div>
-                <div id="ghost-output"></div>
-                <div id="result-output-div"></div>
+        <div id="parent-div-wrapper">
+            <div id="left-main-col">
+                <div id="calculator-div-wrapper">
+                    <div id="calculator-main-div">
+                        <div id="top-bar">
+                            <div id="result-bar-div"><input id="result-bar" type="text"></div>
+                            <div id="ghost-output"></div>
+                            <div id="result-output-div"></div>
+                        </div>
+                        <div id="button-bar">
+                            <div id="secondary-buttons-div-left" class="secondary-buttons">
+                                <div class="col">
+                                    <button id="button-lp" class="calc-button button-operator" onclick="handleButtonValue('\(')">(</button>
+                                    <button id="button-rp" class="calc-button button-operator" onclick="handleButtonValue('\)')">)</button>
+                                    <button id="button-power" class="calc-button button-operator" onclick="handleButtonValue('^')">^</button>
+                                    <button id="button-sqrt" class="calc-button button-operator" onclick="handleButtonValue('√')">&#8730;</button>
+                                </div>
+                            </div>
+                            <div id="main-buttons-div">
+                                <div class="row">
+                                    <button id="button-1" class="calc-button button-number" onclick="handleButtonValue(1)">1</button>
+                                    <button id="button-2" class="calc-button button-number" onclick="handleButtonValue(2)">2</button>
+                                    <button id="button-3" class="calc-button button-number" onclick="handleButtonValue(3)">3</button>
+                                </div>
+                                <div class="row">
+                                    <button id="button-4" class="calc-button button-number" onclick="handleButtonValue(4)">4</button>
+                                    <button id="button-5" class="calc-button button-number" onclick="handleButtonValue(5)">5</button>
+                                    <button id="button-6" class="calc-button button-number" onclick="handleButtonValue(6)">6</button>
+                                </div>
+                                <div class="row">
+                                    <button id="button-7"  class="calc-button button-number" onclick="handleButtonValue(7)">7</button>
+                                    <button id="button-8"  class="calc-button button-number" onclick="handleButtonValue(8)">8</button>
+                                    <button id="button-9"  class="calc-button button-number" onclick="handleButtonValue(9)">9</button>
+                                </div>
+                                <div class="row">
+                                    <button id="button-0" class="calc-button button-number" onclick="handleButtonValue(0)">0</button>
+                                    <button id="button-dot" class="calc-button button-dec" onclick="handleButtonValue('.')">.</button>
+                                    <button id="button-equal" class="calc-button button-action" onclick="handleResult()">=</button>
+                                </div>
+                            </div>
+                            <div id="secondary-buttons-div-right" class="secondary-buttons">
+                                <div class="col">
+                                    <button id="button-divide" class="calc-button button-operator" onclick="handleButtonValue('/')">&#247;</button>
+                                    <button id="button-times" class="calc-button button-operator" onclick="handleButtonValue('*')">&#215;</button>
+                                    <button id="button-minus" class="calc-button button-operator" onclick="handleButtonValue('-')">&#8722;</button>
+                                    <button id="button-plus" class="calc-button button-operator" onclick="handleButtonValue('+')">&#43;</button>
+                                </div>
+                                <div class="col">
+                                    <button id="button-backspace" class="calc-button button-action" onclick="removeLastCharacter()">&#9003;</button>
+                                </div>
+                                <div class="col">
+                                    <button id="button-ac" class="calc-button button-action" onclick="clearInput()">AC</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="button-bar">
-                <div id="secondary-buttons-div-left" class="secondary-buttons">
-                    <div class="col">
-                        <button id="button-lp" class="calc-button button-operator" onclick="handleButtonValue('\(')">(</button>
-                        <button id="button-rp" class="calc-button button-operator" onclick="handleButtonValue('\)')">)</button>
-                        <button id="button-power" class="calc-button button-operator" onclick="handleButtonValue('^')">^</button>
-                        <button id="button-sqrt" class="calc-button button-operator" onclick="handleButtonValue('√')">&#8730;</button>
-                    </div>
-                </div>
-                <div id="main-buttons-div">
-                    <div class="row">
-                        <button id="button-1" class="calc-button button-number" onclick="handleButtonValue(1)">1</button>
-                        <button id="button-2" class="calc-button button-number" onclick="handleButtonValue(2)">2</button>
-                        <button id="button-3" class="calc-button button-number" onclick="handleButtonValue(3)">3</button>
-                    </div>
-                    <div class="row">
-                        <button id="button-4" class="calc-button button-number" onclick="handleButtonValue(4)">4</button>
-                        <button id="button-5" class="calc-button button-number" onclick="handleButtonValue(5)">5</button>
-                        <button id="button-6" class="calc-button button-number" onclick="handleButtonValue(6)">6</button>
-                    </div>
-                    <div class="row">
-                        <button id="button-7"  class="calc-button button-number" onclick="handleButtonValue(7)">7</button>
-                        <button id="button-8"  class="calc-button button-number" onclick="handleButtonValue(8)">8</button>
-                        <button id="button-9"  class="calc-button button-number" onclick="handleButtonValue(9)">9</button>
-                    </div>
-                    <div class="row">
-                        <button id="button-0" class="calc-button button-number" onclick="handleButtonValue(0)">0</button>
-                        <button id="button-dot" class="calc-button button-dec" onclick="handleButtonValue('.')">.</button>
-                        <button id="button-equal" class="calc-button button-action" onclick="handleResult()">=</button>
-                    </div>
-                </div>
-                <div id="secondary-buttons-div-right" class="secondary-buttons">
-                    <div class="col">
-                        <button id="button-divide" class="calc-button button-operator" onclick="handleButtonValue('/')">&#247;</button>
-                        <button id="button-times" class="calc-button button-operator" onclick="handleButtonValue('*')">&#215;</button>
-                        <button id="button-minus" class="calc-button button-operator" onclick="handleButtonValue('-')">&#8722;</button>
-                        <button id="button-plus" class="calc-button button-operator" onclick="handleButtonValue('+')">&#43;</button>
-                    </div>
-                    <div class="col">
-                        <button id="button-backspace" class="calc-button button-action" onclick="removeLastCharacter()">&#9003;</button>
-                    </div>
-                    <div class="col">
-                        <button id="button-ac" class="calc-button button-action" onclick="clearInput()">AC</button>
-                    </div>
-                </div>
-            </div>
+            <div id="right-main-col"></div>
         </div>
     </body>
 </html>

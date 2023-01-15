@@ -1,12 +1,43 @@
 /*main*/
 
 /*id*/
+#parent-div-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+#left-main-col {
+    width: 67%;
+}
+#right-main-col {
+    width: 33%;
+}
 #button-bar {
     display: flex;
+}
+#calculator-div-wrapper {
+    display: flex;
+    justify-content: space-around;
 }
 #calculator-main-div {
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    background: whitesmoke;
+}
+#result-bar-div {
+    padding: 5px 5px 0 5px;
+}
+#result-bar {
+    margin: 0 0 5px 0;
+    width: 100%;
+    height: 40px;
+    font-size: 20px
+}
+#ghost-output, #result-output-div {
+    margin: 0 0 0 5px;
+}
+#button-bar {
+    margin: 5px 0 5px 0;
 }
 #main-buttons-div {
     display: flex;
@@ -20,7 +51,35 @@
 .col {
     display: flex;
     flex-direction: column;
+    margin: 0 5px 0 5px;
 }
 .row {
     display: flex;
+    margin: 0 5px 0 5px;
+}
+.col button, .row button {
+    width: 60px;
+    height: 40px;
+}
+.calc-button {
+    margin: 1px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.calc-button:hover {
+    opacity: 75%;
+}
+.button-number {
+    background: lightgray;
+}
+.button-dec {
+    background: silver;
+}
+.button-operator {
+    background: white;
+}
+.button-action {
+    background: royalblue;
 }

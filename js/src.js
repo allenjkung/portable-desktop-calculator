@@ -16,7 +16,8 @@ function tokenize(str) {
             }
             else {
                 if(token) {
-                    tokenArr.push(parseFloat(token), character);
+                    let pushedToken = token === '-' ? token : parseFloat(token);
+                    tokenArr.push(pushedToken, character);
                 }
                 else {
                     tokenArr.push(character);
@@ -87,7 +88,19 @@ function handleRightParenthesis(pastTokens) {
             }
             parenthesisTokens = newTokens;
         }
-        pastTokens.push(parenthesisTokens.pop());
+        let parenthesisTokenRes = parenthesisTokens.pop();
+        let resultToPush = '';
+        if(pastTokens.length > 0 && (typeof pastTokens[pastTokens.length - 1] === 'number' || pastTokens[pastTokens.length - 1] === '-')) {
+            let lastValue = pastTokens.pop();
+            if(lastValue === '-') {
+                lastValue = -1;
+            }
+            resultToPush = lastValue * parenthesisTokenRes;
+        }
+        else {
+            resultToPush = parenthesisTokenRes;
+        }
+        pastTokens.push(resultToPush);
     }
     catch(error) {
         return error;

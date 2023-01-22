@@ -190,8 +190,20 @@ function handleResult() {
     const resultBarElem = document.getElementById('result-bar');
     const resultBarValue = resultBarElem.value;
     const output = predictedOutput(resultBarValue);
-    const resultOutputElem = document.getElementById('result-output-div');
-    resultOutputElem.innerHTML = output;
+
+    const newResultRow = document.createElement('div');
+    newResultRow.setAttribute('class', 'result-hist-row');
+    const resultHistRowInput = document.createElement('div');
+    resultHistRowInput.innerHTML = resultBarValue;
+    resultHistRowInput.setAttribute('class', 'result-hist-row-input');
+    const resultHistRowOutput = document.createElement('div');
+    resultHistRowOutput.setAttribute('class', 'result-hist-row-output');
+    resultHistRowOutput.innerHTML = output;
+    newResultRow.append(resultHistRowInput);
+    newResultRow.append(resultHistRowOutput);
+    const resultHistoryElem = document.getElementById('result-history-wrapper');
+    resultHistoryElem.prepend(newResultRow);
+
     clearInput();
 }
 
@@ -207,5 +219,10 @@ addEventListener("load", () => {
     const resultBar = document.getElementById('result-bar');
     resultBar.addEventListener('input', (event) => {
         handlePredictedOutput(event.target.value);
+    });
+    resultBar.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            handleResult();
+        }
     });
 });

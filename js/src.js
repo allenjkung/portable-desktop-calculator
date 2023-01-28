@@ -3,34 +3,50 @@ const pemdasOperators = [
     {'(' : '', ')' : (a) => handleRightParenthesis(a)},
     {'^' : (a, b) => Math.pow(a,b), '√' : (a) => Math.sqrt(a)},
     {'*' : (a, b) => a * b, '/' : (a, b) => a / b},
-    {'+' : (a, b) => a + b, '-' : (a, b) => a - b}
+    {'+' : (a, b) => handleAddition(a, b), '-' : (a, b) => handleSubtraction(a, b)}
 ];
 
 function tokenize(str) {
     const tokenArr = [];
     let token = '';
-    for(const character of str) {
-        if('()^√*/+-'.includes(character)) {
-            if(token === '' && character === '-') {
-                token = '-';
+    try {
+        for(const character of str) {
+            if(character.match(/[a-zA-Z]/) && character !== 'e') {
+                throw new Error(('Invalid Character: ' + character));
             }
-            else {
-                if(token) {
-                    let pushedToken = token === '-' ? token : parseFloat(token);
-                    tokenArr.push(pushedToken, character);
+            if('()^√*/+-'.includes(character)) {
+                if(token === '' && character === '-') {
+                    token = '-';
                 }
                 else {
-                    tokenArr.push(character);
+                    if(token) {
+                        let pushedToken = (token === '-' || token.includes('e')) ? token : parseFloat(token);
+                        tokenArr.push(pushedToken, character);
+                    }
+                    else {
+                        tokenArr.push(character);
+                    }
+                    token = '';
                 }
-                token = '';
+            }
+            else {
+                token += character;
             }
         }
-        else {
-            token += character;
+        if(token !== '') {
+            if(token.includes('e')) {
+                if(token[token.length - 1] !== 'e') {
+                    throw new Error(('Invalid Use of e: '));
+                }
+                tokenArr.push(token);
+            }
+            else {
+                tokenArr.push(parseFloat(token));
+            }
         }
     }
-    if(token !== '') {
-        tokenArr.push(parseFloat(token));
+    catch(error) {
+        return error;
     }
     return tokenArr;
 }
@@ -106,6 +122,20 @@ function handleRightParenthesis(pastTokens) {
         return error;
     }
     return pastTokens;
+}
+
+function handleAddition(a, b) {
+    if(a[a.length - 1] === 'e') {
+        return (a.substring(0, a.length - 1) * Math.pow(10, b));
+    }
+    return a + b;
+}
+
+function handleSubtraction(a, b) {
+    if(a[a.length - 1] === 'e') {
+        return (a.substring(0, a.length - 1) * Math.pow(10, (-1 * b)));
+    }
+    return a - b;
 }
 
 function handleTokens(tokens) {
